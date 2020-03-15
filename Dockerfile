@@ -117,7 +117,10 @@ RUN ldconfig
 WORKDIR /tmp
 RUN git clone https://github.com/pjreddie/darknet
 WORKDIR /tmp/darknet
-RUN sed -ie "s/GPU=0/GPU=1/g" Makefile
-RUN sed -ie "s/CUDNN=0/CUDNN=1/g" Makefile
-RUN sed -ie "s/OPENCV=0/OPENCV=1/g" Makefile
+ARG GPU=0
+ARG CUDNN=0
+ARG OPENCV=0
+RUN sed -ie "s/GPU=0/GPU=$GPU/g" Makefile
+RUN sed -ie "s/CUDNN=0/CUDNN=$CUDNN/g" Makefile
+RUN sed -ie "s/OPENCV=0/OPENCV=$OPENCV/g" Makefile
 RUN make

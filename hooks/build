@@ -1,0 +1,4 @@
+#!/bin/sh
+docker build --build-arg GPU=0 --build-arg CUDNN=0 --build-arg OPENCV=0 -t $IMAGE_NAME .
+docker build --build-arg GPU=0 --build-arg CUDNN=0 --build-arg OPENCV=0 -t $DOCKER_REPO:cpu .
+docker build --build-arg GPU=1 --build-arg CUDNN=1 --build-arg OPENCV=1 -t $DOCKER_REPO:gpu .
