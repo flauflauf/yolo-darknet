@@ -106,17 +106,15 @@ RUN cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local \
 ..
 RUN cmake --build . --config Release
 RUN make install
-RUN cd /
-RUN rm -rf /tmp/*
 
 # config path
 RUN LD_LIBRARY_PATH=/usr/local/lib:/usr/lib; export LD_LIBRARY_PATH
 RUN ldconfig
 
 # build darknet
-WORKDIR /tmp
-RUN git clone https://github.com/pjreddie/darknet
-WORKDIR /tmp/darknet
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+WORKDIR /darknet
+RUN git clone https://github.com/pjreddie/darknet .
 ARG GPU=0
 ARG CUDNN=0
 ARG OPENCV=0
